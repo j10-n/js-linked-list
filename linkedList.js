@@ -29,13 +29,20 @@ function linkedListGenerator(){
         return obj;
         
     }
+
     function get(num){
         let node = head;
-        for(i = 0; i < num; i++){
-            if(node.next === null){
+        if (num < 0){
+            return false;
+        }
+
+        for(let i = 0; i < num; i++){
+            if(node.next !== null){
+                node = node.next;
+            }
+            else{
                 return false;
             }
-            node = node.next;
         }
         return node;
     }
@@ -61,11 +68,25 @@ function linkedListGenerator(){
             get(n - 1).next = get(n + 1);
         }
     }
-
     
-    function insert(val, num){
-
-    }
+    function insert(value, i) {
+        const newNode = {
+          value: value,
+          next: null
+        };
+    
+        if (get(i - 1) === tail) {
+          tail.next = newNode;
+        } else if (get(i) === head) {
+          newNode.next = head;
+          head = newNode;
+        } else if (get(i)) {
+          newNode.next = get(i);
+          get(i - 1).next = newNode;
+        } else {
+          return false;
+        }
+      }
 
     return {
         getHead,
